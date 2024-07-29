@@ -1,0 +1,515 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Laravel Blog</title>
+
+    <link href="https://unpkg.com/tailwindcss@^2/dist/tailwind.min.css" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600;700&display=swap" rel="stylesheet">
+</head>
+
+<body class="font-open-sans">
+    <section class="px-4 md:px-6 lg:px-8 py-8">
+        <nav class="flex justify-between items-center">
+            <div>
+                <a href="/">
+                    <img src="../images/logo.svg" alt="Laracast Logo" class="w-full" style="max-width: 165px;"
+                        height="16">
+                </a>
+            </div>
+
+            <div class="md:hidden flex items-center">
+                <button id="toggle-menu" class="text-gray-500 hover:text-gray-700 focus:outline-none">
+                    <svg id="toggle-icon" class="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+                        xmlns="http://www.w3.org/2000/svg">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M4 6h16M4 12h16M4 18h16"></path>
+                    </svg>
+                    <svg id="close-icon" class="h-6 w-6 hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+                        xmlns="http://www.w3.org/2000/svg">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M4 6h16M4 12h16m-7 6h7"></path>
+                    </svg>
+                </button>
+            </div>
+
+            <div class="hidden md:flex text-xs">
+                <a href="/" class="font-bold uppercase py-3">Home Page</a>
+                <a href="#"
+                    class="bg-blue-500 ml-3 rounded-full font-semibold text-white uppercase px-5 py-3">
+                    Subscribe for Updates
+                </a>
+            </div>
+        </nav>
+
+        <div id="mobile-menu" class="md:hidden hidden bg-gray-100 rounded-xl mt-5 p-4 text-center">
+            <a href="/" class="block py-3 px-4 text-sm text-gray-700 hover:bg-gray-200 font-bold uppercase">Home
+                Page</a>
+            <a href="#"
+                class="block py-3 px-3 ml-3 rounded-full text-sm text-white bg-blue-500 hover:bg-blue-600 font-semibold uppercase">
+                Subscribe for Updates
+            </a>
+        </div>
+
+        <header class="max-w-4xl mx-auto mt-20 text-center">
+            <div class="max-w-xl mx-auto">
+                <h1 class="text-4xl">Latest <span class="text-blue-500">Laravel From Scratch</span> News</h1>
+                <h2 class="mt-2 inline-flex">By Lary Laracore
+                    <img src="../images/lary-head.svg" alt="Head of Lary the mascot">
+                </h2>
+                <p class="text-sm mt-14">
+                    Another year, Another update. We're refreshing the popular Laravel series with new content.
+                    I'm going to keep you guys up to speed with what's going on!
+                </p>
+
+                <div class="tw-flex tw-justify-center space-y-2 lg:space-y-0 lg:space-x-4 mt-8">
+
+                    <!-- -------- Category --------- -->
+                    <span class="relative flex lg:inline-flex items-center bg-gray-100 rounded-xl">
+                        <select name="category" id="category"
+                            class="flex-1 py-2 pl-3 pr-9 appearance-none bg-transparent text-sm font-semibold">
+                            <option value="category" disabled selected>Category</option>
+                            <option value="personal">Personal</option>
+                            <option value="business">Business</option>
+                        </select>
+
+                        <svg
+                            class="transform -rotate-90 absolute pointer-events-none"
+                            style="right: 12px;"
+                            width="13"
+                            height="13"
+                            fill="currentColor" class="bi bi-chevron-left" viewBox="0 0 16 16">
+                            <path fill-rule="evenodd"
+                                d="M11.354 1.646a.5.5 0 0 1 0 .708L5.707 8l5.647 5.646a.5.5 0 0 1-.708.708l-6-6a.5.5 0 0 1 0-.708l6-6a.5.5 0 0 1 .708 0z" />
+                        </svg>
+                    </span>
+
+                    <!-- -------- Other Filters --------- -->
+                    <span class="relative flex lg:inline-flex items-center bg-gray-100 rounded-xl">
+                        <select name="category" id="category"
+                            class="flex-1 py-2 pl-3 pr-9 appearance-none bg-transparent text-sm font-semibold">
+                            <option value="category" disabled selected>Other Filters</option>
+                            <option value="foo">foo</option>
+                            <option value="bar">bar</option>
+                        </select>
+
+                        <svg
+                            class="transform -rotate-90 absolute pointer-events-none"
+                            style="right: 12px;"
+                            width="13"
+                            height="13" fill="currentColor" class="bi bi-chevron-left " viewBox="0 0 16 16">
+                            <path fill-rule="evenodd"
+                                d="M11.354 1.646a.5.5 0 0 1 0 .708L5.707 8l5.647 5.646a.5.5 0 0 1-.708.708l-6-6a.5.5 0 0 1 0-.708l6-6a.5.5 0 0 1 .708 0z" />
+                        </svg>
+                    </span>
+
+                    <!-- -------- Search --------- -->
+                    <span class="relative flex lg:inline-flex items-center bg-gray-100 rounded-xl px-3 py-2">
+                        <svg
+                            width="14"
+                            height="14"
+                            viewBox="0 0 15 15" class="relative" style="right: 8px; top:2px; left:2px;">
+                            <g fill="none" fill-rule="evenodd">
+                                <path d="M-2-2h20v20H-2z"></path>
+                                <path class="fill-current"
+                                    d="M10.443 9.232h-.638l-.226-.218A5.223 5.223 0 0 0 10.846 5.6 5.247 5.247 0 1 0 5.6 10.846c1.3 0 2.494-.476 3.414-1.267l.218.226v.638l4.036 4.028 1.203-1.203-4.028-4.036zm-4.843 0A3.627 3.627 0 0 1 1.967 5.6 3.627 3.627 0 0 1 5.6 1.967 3.627 3.627 0 0 1 9.232 5.6 3.627 3.627 0 0 1 5.6 9.232z">
+                                </path>
+                            </g>
+                        </svg>
+                        <form action="#" method="get">
+                            <input
+                                type="search"
+                                name="search"
+                                id="search"
+                                placeholder="Find Something"
+                                class="bg-transparent placeholder-black font-semibold text-sm pl-2">
+                        </form>
+                    </span>
+                </div>
+            </div>
+        </header>
+
+        <main class="max-w-6xl md:mt-15 lg:mt-20 mx-auto space-y-6">
+
+            <article
+                class="hover:bg-gray-100 border border-black border-opacity-0 hover:border-opacity-5 rounded-xl transition-colors duration-300 rounded-xl">
+                <div class="lg:flex px-5 py-6">
+                    <div class="flex-1 lg:mr-8">
+                        <img src="../images/illustration-1.png" alt="Blog Post Illustration" class="rounded-xl">
+                    </div>
+
+                    <div class="flex-1 flex flex-col justify-between">
+
+                        <div class="space-x-4 mt-4 md:mt-0">
+                            <a href="#"
+                                class="px-3 py-1 border rounded-full border-blue-300 text-blue-500 text-xs font-semibold uppercase"
+                                style="font-size: 10px;">
+                                Techniques
+                            </a>
+                            <a href="#"
+                                class="px-3 py-1 border rounded-full border-red-300 text-red-500 text-xs font-semibold uppercase"
+                                style="font-size: 10px;">
+                                Updates
+                            </a>
+                        </div>
+
+                        <div class="mt-4">
+                            <h1 class="text-3xl">This is a big title and it will look great on two or even three
+                                lines. wooohoo!</h1>
+                            <span class="mt-2 block text-gray-400 text-xs ">Published <time>1 day ago</time></span>
+                        </div>
+
+                        <div class="text-sm mt-6">
+                            <p>Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an
+                                unknown printer took a galley of
+                                type and scrambled it to make a type specimen book.</p>
+
+                            <p class="mt-4">It has survived not only five centuries, but also the leap into
+                                electronic typesetting, remaining essentially unchanged.</p>
+                        </div>
+
+                        <footer class="flex justify-between items-center mt-8">
+                            <div class="flex items-center text-sm">
+                                <img src="../images/lary-avatar.svg" alt="Lary avatar">
+                                <div class="ml-4">
+                                    <h5 class="font-bold">Lary Laracore</h5>
+                                    <h6>Mascot at Laracast</h6>
+                                </div>
+                            </div>
+
+                            <div class="hidden md:block">
+                                <a href="#" class="text-xs font-semibold bg-gray-200 rounded-full px-8 py-2">Read
+                                    More</a>
+                            </div>
+                        </footer>
+                    </div>
+                </div>
+            </article>
+
+            <div class="lg:grid lg:grid-cols-2">
+                <article
+                    class="hover:bg-gray-100 border border-black border-opacity-0 hover:border-opacity-5 rounded-xl transition-colors duration-300 ">
+                    <div class="px-5 py-6">
+                        <div>
+                            <img src="../images/illustration-1.png" alt="Blog Post Illustration" class="rounded-xl">
+                        </div>
+
+                        <div class="flex flex-col justify-between mt-8">
+                            <div class="space-x-4">
+                                <a href="#"
+                                    class="px-3 py-1 border rounded-full border-blue-300 text-blue-500 text-xs font-semibold uppercase"
+                                    style="font-size: 10px;">
+                                    Techniques
+                                </a>
+                                <a href="#"
+                                    class="px-3 py-1 border rounded-full border-red-300 text-red-500 text-xs font-semibold uppercase"
+                                    style="font-size: 10px;">
+                                    Updates
+                                </a>
+                            </div>
+
+                            <div class="mt-4">
+                                <h1 class="text-3xl">This is a big title and it will look great on two or even three
+                                    lines. wooohoo!</h1>
+                                <span class="mt-2 block text-gray-400 text-xs ">Published <time>1 day ago</time></span>
+                            </div>
+
+                            <div class="text-sm mt-6">
+                                <p>Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an
+                                    unknown printer took a galley of
+                                    type and scrambled it to make a type specimen book.</p>
+
+                                <p class="mt-4">It has survived not only five centuries, but also the leap into
+                                    electronic typesetting, remaining essentially unchanged.</p>
+                            </div>
+
+                            <footer class="flex justify-between items-center mt-8">
+                                <div class="flex items-center text-sm">
+                                    <img src="../images/lary-avatar.svg" alt="Lary avatar">
+                                    <div class="ml-4">
+                                        <h5 class="font-bold">Lary Laracore</h5>
+                                        <h6>Mascot at Laracast</h6>
+                                    </div>
+                                </div>
+
+                                <div class="hidden md:block">
+                                    <a href="#" class="text-xs font-semibold bg-gray-200 rounded-full px-8 py-2">Read
+                                        More</a>
+                                </div>
+                            </footer>
+                        </div>
+                    </div>
+                </article>
+
+                <article
+                    class="hover:bg-gray-100 border border-black border-opacity-0 hover:border-opacity-5 rounded-xl transition-colors duration-300 ">
+                    <div class="px-5 py-6">
+                        <div>
+                            <img src="../images/illustration-2.png" alt="Blog Post Illustration" class="rounded-xl">
+                        </div>
+
+                        <div class="flex flex-col justify-between mt-8">
+                            <div class="space-x-4">
+                                <a href="#"
+                                    class="px-3 py-1 border rounded-full border-blue-300 text-blue-500 text-xs font-semibold uppercase"
+                                    style="font-size: 10px;">
+                                    Techniques
+                                </a>
+                                <a href="#"
+                                    class="px-3 py-1 border rounded-full border-red-300 text-red-500 text-xs font-semibold uppercase"
+                                    style="font-size: 10px;">
+                                    Updates
+                                </a>
+                            </div>
+
+                            <div class="mt-4">
+                                <h1 class="text-3xl">This is a big title and it will look great on two or even three
+                                    lines. wooohoo!</h1>
+                                <span class="mt-2 block text-gray-400 text-xs ">Published <time>1 day ago</time></span>
+                            </div>
+
+                            <div class="text-sm mt-6">
+                                <p>Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an
+                                    unknown printer took a galley of
+                                    type and scrambled it to make a type specimen book.</p>
+
+                                <p class="mt-4">It has survived not only five centuries, but also the leap into
+                                    electronic typesetting, remaining essentially unchanged.</p>
+                            </div>
+
+                            <footer class="flex justify-between items-center mt-8">
+                                <div class="flex items-center text-sm">
+                                    <img src="../images/lary-avatar.svg" alt="Lary avatar">
+                                    <div class="ml-4">
+                                        <h5 class="font-bold">Lary Laracore</h5>
+                                        <h6>Mascot at Laracast</h6>
+                                    </div>
+                                </div>
+
+                                <div class="hidden md:block">
+                                    <a href="#" class="text-xs font-semibold bg-gray-200 rounded-full px-8 py-2">Read
+                                        More</a>
+                                </div>
+                            </footer>
+                        </div>
+                    </div>
+                </article>
+            </div>
+
+            <div class="lg:grid lg:grid-cols-3">
+                <article
+                    class="hover:bg-gray-100 border border-black border-opacity-0 hover:border-opacity-5 rounded-xl transition-colors duration-300 ">
+                    <div class="px-5 py-6">
+                        <div>
+                            <img src="../images/illustration-3.png" alt="Blog Post Illustration" class="rounded-xl">
+                        </div>
+
+                        <div class="flex flex-col justify-between mt-8">
+                            <div class="space-x-4">
+                                <a href="#"
+                                    class="px-3 py-1 border rounded-full border-blue-300 text-blue-500 text-xs font-semibold uppercase"
+                                    style="font-size: 10px;">
+                                    Techniques
+                                </a>
+                                <a href="#"
+                                    class="px-3 py-1 border rounded-full border-red-300 text-red-500 text-xs font-semibold uppercase"
+                                    style="font-size: 10px;">
+                                    Techniques
+                                </a>
+                            </div>
+
+                            <div class="mt-4">
+                                <h1 class="text-3xl">This is a big title and it will look great on two or even three
+                                    lines. wooohoo!</h1>
+                                <span class="mt-2 block text-gray-400 text-xs ">Published <time>1 day ago</time></span>
+                            </div>
+
+                            <div class="text-sm mt-6">
+                                <p>Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an
+                                    unknown printer took a galley of
+                                    type and scrambled it to make a type specimen book.</p>
+
+                                <p class="mt-4">It has survived not only five centuries, but also the leap into
+                                    electronic typesetting, remaining essentially unchanged.</p>
+                            </div>
+
+                            <footer class="flex justify-between items-center mt-8">
+                                <div class="flex items-center text-sm">
+                                    <img src="../images/lary-avatar.svg" alt="Lary avatar">
+                                    <div class="ml-4">
+                                        <h5 class="font-bold">Lary Laracore</h5>
+                                        <h6>Mascot at Laracast</h6>
+                                    </div>
+                                </div>
+
+                                <div class="hidden md:block">
+                                    <a href="#" class="text-xs font-semibold bg-gray-200 rounded-full px-8 py-2">Read
+                                        More</a>
+                                </div>
+                            </footer>
+                        </div>
+                    </div>
+                </article>
+
+                <article
+                    class="hover:bg-gray-100 border border-black border-opacity-0 hover:border-opacity-5 rounded-xl transition-colors duration-300 ">
+                    <div class="px-5 py-6">
+                        <div>
+                            <img src="../images/illustration-4.png" alt="Blog Post Illustration" class="rounded-xl">
+                        </div>
+
+                        <div class="flex flex-col justify-between mt-8">
+                            <div class="space-x-4">
+                                <a href="#"
+                                    class="px-3 py-1 border rounded-full border-blue-300 text-blue-500 text-xs font-semibold uppercase"
+                                    style="font-size: 10px;">
+                                    Techniques
+                                </a>
+                                <a href="#"
+                                    class="px-3 py-1 border rounded-full border-red-300 text-red-500 text-xs font-semibold uppercase"
+                                    style="font-size: 10px;">
+                                    Techniques
+                                </a>
+                            </div>
+
+                            <div class="mt-4">
+                                <h1 class="text-3xl">This is a big title and it will look great on two or even three
+                                    lines. wooohoo!</h1>
+                                <span class="mt-2 block text-gray-400 text-xs ">Published <time>1 day ago</time></span>
+                            </div>
+
+                            <div class="text-sm mt-6">
+                                <p>Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an
+                                    unknown printer took a galley of
+                                    type and scrambled it to make a type specimen book.</p>
+
+                                <p class="mt-4">It has survived not only five centuries, but also the leap into
+                                    electronic typesetting, remaining essentially unchanged.</p>
+                            </div>
+
+                            <footer class="flex justify-between items-center mt-8">
+                                <div class="flex items-center text-sm">
+                                    <img src="../images/lary-avatar.svg" alt="Lary avatar">
+                                    <div class="ml-4">
+                                        <h5 class="font-bold">Lary Laracore</h5>
+                                        <h6>Mascot at Laracast</h6>
+                                    </div>
+                                </div>
+
+                                <div class="hidden md:block">
+                                    <a href="#" class="text-xs font-semibold bg-gray-200 rounded-full px-8 py-2">Read
+                                        More</a>
+                                </div>
+                            </footer>
+                        </div>
+                    </div>
+                </article>
+
+                <article
+                    class="hover:bg-gray-100 border border-black border-opacity-0 hover:border-opacity-5 rounded-xl transition-colors duration-300 ">
+                    <div class="px-5 py-6">
+                        <div>
+                            <img src="../images/illustration-5.png" alt="Blog Post Illustration" class="rounded-xl">
+                        </div>
+
+                        <div class="flex flex-col justify-between mt-8">
+                            <div class="space-x-4">
+                                <a href="#"
+                                    class="px-3 py-1 border rounded-full border-blue-300 text-blue-500 text-xs font-semibold uppercase"
+                                    style="font-size: 10px;">
+                                    Techniques
+                                </a>
+                                <a href="#"
+                                    class="px-3 py-1 border rounded-full border-red-300 text-red-500 text-xs font-semibold uppercase"
+                                    style="font-size: 10px;">
+                                    Techniques
+                                </a>
+                            </div>
+
+                            <div class="mt-4">
+                                <h1 class="text-3xl">This is a big title and it will look great on two or even three
+                                    lines. wooohoo!</h1>
+                                <span class="mt-2 block text-gray-400 text-xs ">Published <time>1 day ago</time></span>
+                            </div>
+
+                            <div class="text-sm mt-6">
+                                <p>Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an
+                                    unknown printer took a galley of
+                                    type and scrambled it to make a type specimen book.</p>
+
+                                <p class="mt-4">It has survived not only five centuries, but also the leap into
+                                    electronic typesetting, remaining essentially unchanged.</p>
+                            </div>
+
+                            <footer class="flex justify-between items-center mt-8">
+                                <div class="flex items-center text-sm">
+                                    <img src="../images/lary-avatar.svg" alt="Lary avatar">
+                                    <div class="ml-4">
+                                        <h5 class="font-bold">Lary Laracore</h5>
+                                        <h6>Mascot at Laracast</h6>
+                                    </div>
+                                </div>
+
+                                <div class="hidden md:block">
+                                    <a href="#" class="text-xs font-semibold bg-gray-200 rounded-full px-8 py-2">Read
+                                        More</a>
+                                </div>
+                            </footer>
+                        </div>
+                    </div>
+                </article>
+            </div>
+
+        </main>
+
+        <footer
+            class="bg-gray-100 border border-black border-opacity-5 rounded-xl text-center py-10 px-4 sm:px-8 lg:px-16 mt-16">
+
+            <img src="../images/lary-newsletter-icon.png" alt="Lary News Letter" class="mx-auto mb-4"
+                style="width: 145px;">
+
+            <h5 class="text-xl sm:text-2xl lg:text-3xl">Stay in touch with the latest posts</h5>
+            <p class="text-xs sm:text-sm">Promise to keep the inbox clean. No bugs.</p>
+
+            <div class="mt-10">
+                <div class="relative inline-block mx-auto lg:bg-gray-200 rounded-full">
+                    <form action="#" method="post" class="lg:flex text-sm">
+                        <div class="lg:py-3 lg:px-5 flex items-center">
+                            <label for="email" class="hidden lg:tw-inline-block">
+                                <img src="../images/mailbox-icon.svg" alt="Mail Box" />
+                            </label>
+                            <input type="email" placeholder="Your email address"
+                                class="lg:bg-transparent pl-4 focus-within:outline-none rounded-full sm:h-10 md:h-10" />
+                        </div>
+                        <button type="submit"
+                            class="bg-blue-500 hover:bg-blue-600 mt-4 lg:mt-0 lg:ml-3 rounded-full text-xs font-semibold text-white uppercase py-3 px-8">
+                            Subscribe
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </footer>
+
+    </section>
+
+    <script>
+        document.getElementById('toggle-menu').addEventListener('click', function () {
+            // Toggle the menu visibility
+            var mobileMenu = document.getElementById('mobile-menu');
+            mobileMenu.classList.toggle('hidden');
+
+            // Toggle hamburger icon and close icon
+            var toggleIcon = document.getElementById('toggle-icon');
+            var closeIcon = document.getElementById('close-icon');
+
+            toggleIcon.classList.toggle('hidden');
+            closeIcon.classList.toggle('hidden');
+        });
+    </script>
+</body>
+
+</html>
